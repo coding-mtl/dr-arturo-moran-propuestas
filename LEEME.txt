@@ -1,0 +1,26 @@
+DR. ARTURO MORAN VIDAURRI — TRES PROPUESTAS DE DISEÑO
+
+Abra index.html en su navegador para comparar las tres propuestas.
+Todos los recursos visuales y tipografías están incluidos en esta carpeta.
+
+01 — Claridad clínica
+Una imagen luminosa, médica y cercana. Especialidad clara, fotografía
+natural y una navegación sencilla.
+
+02 — Prestigio editorial
+Una presentación elegante y serena, con tipografía clásica, amplio espacio
+y un retrato central. La opción más editorial y personal.
+
+03 — Autoridad contemporánea
+Una presencia sólida en azul institucional, con una fotografía protagonista
+y una estructura precisa. La opción de mayor contraste visual.
+
+La carpeta screenshots contiene vistas de escritorio y móvil.
+Los archivos terminados en -full muestran la página completa.
+
+Estas son propuestas visuales de la página de inicio, no el sitio final.
+Los enlaces a especialidades abren las páginas actuales del sitio.
+Los botones de cita abren el WhatsApp real del consultorio.
+
+Para la siguiente etapa: elegir una dirección principal y anotar los detalles
+preferidos de las otras propuestas. Después se desarrolla el sitio completo.
