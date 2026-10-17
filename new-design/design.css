@@ -26,3 +26,31 @@ h2{font:400 clamp(46px,4.1vw,64px)/1.03 var(--serif);letter-spacing:-.025em}h2 e
 
 /* Clinical titles are direct; the expressive italic is reserved for the opening, care and close. */
 .specialties h2{font:400 clamp(44px,4.1vw,62px)/1.04 var(--sans);letter-spacing:-.05em}.doctor-copy h2{letter-spacing:-.035em}@media(max-width:900px){.specialties h2{font-size:46px}}@media(max-width:700px){.specialties h2{font-size:43px}}@media(max-width:420px){.specialties h2{font-size:40px}}
+
+/* Keep the document on its vertical axis without disabling browser zoom.
+   Clip avoids creating a nested scroll container, so the sticky header still works. */
+html{inline-size:100%;max-inline-size:100%;overflow-x:hidden;overscroll-behavior-x:none}
+body{inline-size:100%;max-inline-size:100%;min-inline-size:0;overscroll-behavior-x:none}
+@supports(overflow:clip){html,body{overflow-x:clip}}
+main{min-inline-size:0;max-inline-size:100%}
+.wrap{min-inline-size:0}
+.hero-layout>*,.credentials>*,.specialty-grid>*,.doctor-layout>*,
+.care-heading>*,.care-layout>*,.video-grid>*,.insurance>*,
+.faq-layout>*,.contact-layout>*{min-inline-size:0}
+.button{max-inline-size:100%}
+.button-arrow,.circle-arrow{flex-shrink:0}
+.header-cta{flex-shrink:0;white-space:nowrap}
+@media(max-width:700px){
+  html,body{touch-action:pan-y pinch-zoom}
+  .hero-copy{grid-template-columns:minmax(0,1fr)}
+  .credentials{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .js .menu-toggle{width:44px;height:44px}
+  .care-accordion summary h3,.faq-list summary h3{min-inline-size:0;overflow-wrap:break-word}
+  .details-content p,.location-panel address{overflow-wrap:break-word}
+}
+@media(max-width:360px){
+  .header-inner{gap:8px}
+  .header-inner>.brand img{display:none}
+  .header-inner>.brand>span{font-size:14px}
+  .hero h1{font-size:clamp(54px,18vw,65px)}
+}
