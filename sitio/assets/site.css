@@ -109,6 +109,7 @@
 
 /* ---------- Post grid (articles index, related) ---------- */
 .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.lm-acard h2, .lm-acard h3 { font-size: 20px; line-height: 1.2; max-width: none; letter-spacing: -0.02em; }
 .post-grid .lm-acard p { color: var(--mute); font-size: 15px; line-height: 1.5; }
 .post-grid .lm-acard .acard-foot { font-size: 13px; color: var(--mute); margin-top: auto; padding-top: 6px; }
 .post-grid .lm-acard > div { flex: 1; }
@@ -242,6 +243,7 @@
   .article-cover img { aspect-ratio: 4 / 3; border-radius: var(--r-lg); }
   .prose { font-size: 17px; }
   .post-grid, .info-grid, .info-grid.cols-2 { grid-template-columns: 1fr; }
+  .lm-acard h2, .lm-acard h3 { font-size: 17px; }
   .clip-row, .clip-row.cols-3 { grid-template-columns: 1fr 1fr; gap: 12px; }
   .field-row { grid-template-columns: 1fr; }
   .svc-card { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
