@@ -270,7 +270,11 @@
     f.addEventListener('submit', e => {
       const tel = f.querySelector('input[name="telefono"]');
       if (tel && tel.value.replace(/\D/g, '').length < 10) { e.preventDefault(); tel.setCustomValidity('Escribe tu número a 10 dígitos.'); tel.reportValidity(); return; }
-      try { sessionStorage.setItem('lead_draft', JSON.stringify(Object.fromEntries([...new FormData(f)].filter(([k]) => ['nombre', 'telefono', 'correo', 'articulacion', 'mensaje'].includes(k))))); } catch (e2) {}
+      try {
+        const draft = Object.fromEntries([...new FormData(f)].filter(([k]) => ['nombre', 'telefono', 'correo', 'articulacion', 'mensaje', 'tiempo', 'acepto'].includes(k)));
+        draft._card = (f.closest('.form-card') || {}).id || '';
+        sessionStorage.setItem('lead_draft', JSON.stringify(draft));
+      } catch (e2) {}
       const btn = f.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
     });
@@ -282,9 +286,18 @@
 
   /* Form errors returned by the server (?error=...): explain and offer WhatsApp/phone. */
   const err = new URLSearchParams(location.search).get('error');
-  const card = document.querySelector('.form-card');
-  if (err && card) {
-    const msgs = {
+  if (err && document.querySelector('.form-card')) {
+    let draft = {};
+    try { draft = JSON.parse(sessionStorage.getItem('lead_draft') || '{}'); } catch (e) {}
+    /* Show the message on the form the visitor actually used. */
+    const card = (draft._card && document.getElementById(draft._card)) || document.querySelector('.form-card');
+    /* Landing pages never show the phone or WhatsApp; the rest of the site offers them as a fallback. */
+    const lp = document.body.classList.contains('lp');
+    const msgs = lp ? {
+      datos: 'Revisa tus datos: necesitamos tu nombre, un teléfono a 10 dígitos, desde cuándo te duele y que aceptes el aviso de privacidad.',
+      limite: 'Ya recibimos varias solicitudes desde tu conexión. El consultorio te contactará pronto.',
+      envio: 'No pudimos enviar tu solicitud. Por favor inténtalo de nuevo en unos minutos.'
+    } : {
       datos: 'Revisa tus datos: necesitamos tu nombre, un teléfono a 10 dígitos y que aceptes el aviso de privacidad.',
       limite: 'Recibimos varias solicitudes desde tu conexión. Si necesitas algo más, escríbenos por WhatsApp o llámanos.',
       envio: 'No pudimos enviar tu solicitud en este momento. Por favor escríbenos por WhatsApp o llama al 81 2201 0912.'
@@ -295,10 +308,12 @@
     const form = card.querySelector('form');
     card.insertBefore(box, form);
     /* Put back what the visitor had typed. */
-    try {
-      const draft = JSON.parse(sessionStorage.getItem('lead_draft') || '{}');
-      Object.entries(draft).forEach(([k, v]) => { const el = form.elements[k]; if (el && !el.value) el.value = v; });
-    } catch (e) {}
+    Object.entries(draft).forEach(([k, v]) => {
+      const el = form.elements[k];
+      if (!el) return;
+      if (el.type === 'checkbox') el.checked = true;
+      else if (!el.value) el.value = v;
+    });
     card.scrollIntoView({ block: 'start' });
   }
 })();
