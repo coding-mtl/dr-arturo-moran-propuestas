@@ -48,6 +48,18 @@
 
 /* ---------- Service cards (services index) ---------- */
 .svc-list { display: grid; gap: 16px; }
+/* Video testimonials */
+.vtesti-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.vtesti { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 28px; align-items: center; background: var(--ice); border-radius: var(--r-xl); padding: 20px 28px 20px 20px; }
+.vtesti-media .clip-figure { margin: 0; max-width: none; }
+.vtesti-media .clip-cap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.vtesti-body { display: flex; flex-direction: column; gap: 16px; }
+.vtesti-tag { align-self: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); }
+.vtesti blockquote { margin: 0; }
+.vtesti blockquote p { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2vw, 28px); line-height: 1.25; color: var(--ink); }
+.vtesti-who strong { display: block; font-size: 16px; }
+.vtesti-who span { display: block; font-size: 14px; color: var(--mute); }
+.vtesti-note { font-size: 14px; color: var(--mute); line-height: 1.5; border-top: 1px solid var(--line); padding-top: 14px; }
 /* Services index: photo cards */
 .svc-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .svc-photo { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-xl); overflow: hidden; transition: transform 0.5s var(--ease), box-shadow 0.5s, border-color 0.3s; }
@@ -249,6 +261,7 @@
   .footer-cols { grid-template-columns: 1fr 1fr; }
   .lp-form { position: static; }
   .svc-card { grid-template-columns: 160px minmax(0, 1fr); }
+  .vtesti-grid { grid-template-columns: 1fr; }
   .svc-go { display: none; }
 }
 @media (max-width: 720px) {
@@ -260,6 +273,11 @@
   .prose { font-size: 17px; }
   .post-grid, .info-grid, .info-grid.cols-2 { grid-template-columns: 1fr; }
   .svc-photo-grid { grid-template-columns: 1fr; gap: 16px; }
+  .vtesti { grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 16px; padding: 14px; align-items: start; }
+  .vtesti blockquote p { font-size: 19px; }
+  .vtesti-body { gap: 10px; }
+  .vtesti-note { display: none; }
+  .vtesti-tag { font-size: 10px; letter-spacing: 0.04em; padding: 5px 10px; }
   .svc-body { padding: 18px 18px 22px; }
   .lm-acard h2, .lm-acard h3 { font-size: 17px; }
   .clip-row, .clip-row.cols-3 { grid-template-columns: 1fr 1fr; gap: 12px; }
