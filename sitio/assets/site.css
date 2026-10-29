@@ -1,3 +1,5 @@
+/* Jump straight to anchors (Costos, form buttons, TOC) instead of animating the scroll. */
+html { scroll-behavior: auto; }
 /* Site — multi-page components layered on the approved Claro design (claro.css). Same tokens, same rhythm. */
 
 /* ---------- Sub-page hero ---------- */
