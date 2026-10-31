@@ -220,6 +220,25 @@
     });
   }
 
+  /* Vertical clip in a dialog (LP hero video button) */
+  const cdlg = document.querySelector('.clip-dialog');
+  if (cdlg && typeof cdlg.showModal === 'function') {
+    const cplayer = cdlg.querySelector('.clip-dialog-player');
+    let copener = null;
+    cdlg.addEventListener('close', () => { cplayer.replaceChildren(); if (copener) copener.focus(); });
+    cdlg.querySelector('.clip-dialog-close').addEventListener('click', () => cdlg.close());
+    cdlg.addEventListener('click', e => { if (e.target === cdlg) cdlg.close(); });
+    document.querySelectorAll('[data-clip]').forEach(b => b.addEventListener('click', () => {
+      copener = b;
+      const v = document.createElement('video');
+      v.src = b.dataset.clip; v.controls = true; v.autoplay = true; v.playsInline = true; v.setAttribute('playsinline', '');
+      v.setAttribute('aria-label', b.dataset.title || 'Video');
+      cplayer.replaceChildren(v);
+      cdlg.showModal();
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    }));
+  }
+
   /* Clips: poster until clicked, then the real video (nothing downloads before the click). */
   document.querySelectorAll('.clip[data-src]').forEach(clip => {
     const btn = clip.querySelector('button');
